@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>şirketimizin formu</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <form method="post" action="/register">
+        <div>
+        <label>Ad:</label>
+        <input type="text" required name="first_name"><br><br>
+        <label>Soyad:</label>
+        <input type="text" required name="last_name"><br><br>
+        <label>Tel:</label>
+        <input type="tel" name="phone"><br><br>
+        <label>Email:</label>
+        <input type="email" name="email"><br><br>
+        <label>Nationality:</label>
+        <input type="text" name="nationality"><br><br>
+        <label>işe girme nedeni:</label>
+        <textarea name="motivation"></textarea>
+            <br><br>
+            <input type="hidden" name="token" value="mySecret1234">
+            <div style="text-align: right;">                
+        <button type="submit">Gönder</button>
+        </div></div>
+    </form>
+</body>
+</html>
