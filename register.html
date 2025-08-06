@@ -7,18 +7,6 @@
     <link rel="stylesheet" href="register.css">
 </head>
 <body>
-            <h1 style="text-align: center;">ilk olarak token kaydet!</h1>
-
-    <form method="post" action="/login" style="margin-bottom: 20px;">
-        
-        <label>Giriş Token:</label>
-        <input type="text" name="token" required>
-        <div style="text-align: right;">
-        <button type="submit">Kaydet</button>
-        </div>
-    </form>
-
-
     <form method="post" action="/register">
         <div>
             <label>Ad:</label>
@@ -43,6 +31,9 @@
             </div>
         </div>
     </form>
+<form method="POST" action="/logout" class="logout-form">
+    <button type="submit">Çıkış Yap</button>
+</form>
 
 </body>
 </html>

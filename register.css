@@ -42,3 +42,24 @@ body {
     button:hover {
         background-color: #2372a1;
     }
+.logout-form {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+}
+
+.logout-form button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.logout-form button:hover {
+    background-color: #c0392b;
+}
