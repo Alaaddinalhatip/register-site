@@ -48,8 +48,33 @@ input[type="submit"] {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 input[type="submit"]:hover {
     background-color: #2372a1;
+}
+.btn,
+input[type="submit"] {
+    background-color: #2a8cc7;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+}
+
+.btn:hover,
+input[type="submit"]:hover {
+    background-color: #2372a1;
+}
+
+/* مسافة بين الفورمين لو لازمت */
+form + div, /* الحالة اللي استخدمنا فيها div للزر */
+form + form {
+    margin-top: 15px;
 }

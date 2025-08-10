@@ -31,6 +31,9 @@ func main() {
 	http.HandleFunc("/register", handleRegister(db))  // معالجة التسجيل
 	http.HandleFunc("/logout", handleLogout)
 	http.Handle("/login.css", http.FileServer(http.Dir(".")))
+	http.HandleFunc("/signup", serveSignupPage)
+    http.HandleFunc("/signup-submit", handleSignup(db))
+
 
 
 
@@ -95,6 +98,47 @@ func handleLogout(w http.ResponseWriter, r *http.Request) {
 	})
 	http.Redirect(w, r, "/login", http.StatusSeeOther)
 }
+func serveSignupPage(w http.ResponseWriter, r *http.Request) {
+    if r.Method == http.MethodGet {
+        http.ServeFile(w, r, "signup.html")
+        return
+    }
+    http.Error(w, "Yöntem geçersiz", http.StatusMethodNotAllowed)
+}
+
+func handleSignup(db *sql.DB) http.HandlerFunc {
+    return func(w http.ResponseWriter, r *http.Request) {
+        if r.Method != http.MethodPost {
+            http.Error(w, "Yöntem geçersiz", http.StatusMethodNotAllowed)
+            return
+        }
+
+        username := r.FormValue("username")
+        password := r.FormValue("password")
+
+        // تحقق إذا الاسم موجود مسبقاً
+        var exists bool
+        err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM users WHERE username=$1)", username).Scan(&exists)
+        if err != nil {
+            http.Error(w, "Veritabanı hatası", http.StatusInternalServerError)
+            return
+        }
+        if exists {
+            http.Error(w, "Kullanıcı adı zaten var", http.StatusBadRequest)
+            return
+        }
+
+        // إضافة للمستخدمين (مبدئياً بدون Hash)
+        _, err = db.Exec("INSERT INTO users (username, password) VALUES ($1, $2)", username, password)
+        if err != nil {
+            http.Error(w, "Kayıt başarısız", http.StatusInternalServerError)
+            return
+        }
+
+        http.Redirect(w, r, "/login", http.StatusSeeOther)
+    }
+}
+
 
 
 
